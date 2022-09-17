@@ -4,7 +4,23 @@ async function main() {
     let books = await response.json()
 
     books.forEach(renderBook)
+
+    let responses = await fetch('http://127.0.0.1:3001/updateBook', {
+    method: 'PATCH',
+    headers: {
+        'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify({
+        'id': 3,
+        'title' : 'Legends of Arathae',
+    }),
+});
+
+let updatedbook = await responses.json();
+console.log(updatedbook)
 }
+
+
 
 function renderBook(book) {
     let bookContainer = document.querySelector('.book-container')
